@@ -13,8 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.aws.codestar.projecttemplates.controller.HelloWorldController;
@@ -69,7 +69,7 @@ public class ApplicationConfig {
    	 Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         hibernateProperties.put("hibernate.show_sql","true");
-        hibernateProperties.put("hibernate.hbm2ddl.auto","create");
+        hibernateProperties.put("hibernate.hbm2ddl.auto","update");
 		return hibernateProperties;
        
    }
