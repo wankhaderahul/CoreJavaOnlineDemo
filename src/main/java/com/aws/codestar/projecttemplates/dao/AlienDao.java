@@ -18,7 +18,7 @@ public class AlienDao {
 	
 	@Transactional
 	public Alien getAlien(int aid) {
-		Session  session=sf.getCurrentSession();
+		Session  session=sf.openSession();
 		Alien a=session.get(Alien.class, aid);
 		System.out.println(a);
 		
