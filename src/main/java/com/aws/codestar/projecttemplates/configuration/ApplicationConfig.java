@@ -3,6 +3,7 @@ package com.aws.codestar.projecttemplates.configuration;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.hibernate.SessionFactory;
@@ -13,8 +14,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.aws.codestar.projecttemplates.controller.HelloWorldController;
@@ -85,12 +86,21 @@ public class ApplicationConfig {
     	
     }
    
-    @Bean(name="transactionManager")
+   /* @Bean(name="transactionManager")
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory);
         return transactionManager;
-}
+}*/
 
+    @Bean
+    @Autowired
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory, DataSource mainDataSource) {
+        final JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
+        transactionManager.setDataSource(mainDataSource);
+        return transactionManager;
+    }
+    
 }
