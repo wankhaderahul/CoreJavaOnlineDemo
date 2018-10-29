@@ -42,6 +42,13 @@ public class HelloWorldController {
         return mav;
     }
     
+    @RequestMapping("/home")
+   	public ModelAndView home() {
+       	ModelAndView mav = new ModelAndView("home");
+           
+           return mav;
+   	}
+    
     @RequestMapping("alien/{aid}")
     public ModelAndView getAlien(@PathVariable("aid") int aid) {
     	ModelAndView mv=new ModelAndView("showAlien");
