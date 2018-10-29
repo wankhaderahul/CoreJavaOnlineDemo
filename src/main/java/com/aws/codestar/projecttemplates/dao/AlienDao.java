@@ -1,5 +1,7 @@
 package com.aws.codestar.projecttemplates.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,4 +27,21 @@ public class AlienDao {
 		return a;
 		
 	}
+	
+	 @Transactional
+	   	public Alien createAlien(Alien a) {
+	   		
+	   		Session session=sf.getCurrentSession();
+	   		Alien alien=(Alien) session.save(a);
+	   		return alien;
+	   	}
+	    
+	    @Transactional
+	   	public List<Alien> getAliens() {
+	   		
+	   		Session session=sf.getCurrentSession();
+	   		List<Alien> alien=session.createCriteria(Alien.class).list();
+	   		//List<Alien> alien1=session.createQuery("from Alien").list();
+	   		return alien;
+	   	}
 }

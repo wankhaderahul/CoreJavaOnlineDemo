@@ -1,5 +1,7 @@
 package com.aws.codestar.projecttemplates.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -49,5 +51,27 @@ public class HelloWorldController {
 		return mv;
     	
     }
+    
+    @RequestMapping("/getAllAlien")
+	public ModelAndView getAllAlien() {
+		
+		ModelAndView mv=new ModelAndView("showAlien");
+		List<Alien> alienList=(List<Alien>) dao.getAliens();
+		mv.addObject("alienList", alienList);
+		
+		return mv;
+    }
+    
+    @RequestMapping("/addAlien")
+   	public ModelAndView addAlien(Alien alien) {
+       	dao.createAlien(alien);
+   		
+   		ModelAndView mv=new ModelAndView("showAlien");
+   		List<Alien> alienList=(List<Alien>) dao.getAliens();
+   		mv.addObject("alienList", alienList);
+   		
+   		return mv;
+   		
+   	}
     
 }
