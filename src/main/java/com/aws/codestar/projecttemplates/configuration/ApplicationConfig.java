@@ -1,6 +1,5 @@
 package com.aws.codestar.projecttemplates.configuration;
 
-import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -13,13 +12,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.aws.codestar.projecttemplates.controller.HelloWorldController;
 import com.aws.codestar.projecttemplates.model.Alien;
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 /**
  * Spring configuration for sample application.
@@ -51,16 +50,17 @@ public class ApplicationConfig {
 
     @Bean(name="dataSource")
     public DataSource dataSource() {
-    	ComboPooledDataSource dataSource=new ComboPooledDataSource();
+    	//ComboPooledDataSource dataSource=new ComboPooledDataSource();
+    	DriverManagerDataSource dataSource=new DriverManagerDataSource();
     	try {
-			dataSource.setDriverClass("com.mysql.jdbc.Driver");
-		} catch (PropertyVetoException e) {
+			dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
-    	dataSource.setJdbcUrl("jdbc:mysql://youtube.cvicztclv6un.us-east-1.rds.amazonaws.com:3306/rahul");
-        dataSource.setUser("root");
+    	dataSource.setUrl("jdbc:mysql://youtube.cvicztclv6un.us-east-1.rds.amazonaws.com:3306/rahul");
+        dataSource.setUsername("root");
         dataSource.setPassword("rahul1991");
        return dataSource;
     }
